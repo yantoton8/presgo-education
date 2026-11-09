@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Sejarah SMP</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. VARIABEL CSS & SYSTEM DESIGN (Bisa dipisah ke style.css)
+           ========================================================================== */
+        :root {
+            /* Palette Cokelat/Terracotta & Emas Klasik (Light Mode) */
+            --bg-primary: #fcf9f2;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #2c221e;
+            --text-muted: #6b5c54;
+            --primary: #8c3a27;       /* Terracotta Deep */
+            --primary-hover: #702d1d;
+            --accent: #d4af37;        /* Gold Classic */
+            --accent-light: #fef9e7;
+            --border-color: #e6dacd;
+            --shadow-sm: 0 2px 8px rgba(44, 34, 30, 0.06);
+            --shadow-md: 0 8px 24px rgba(44, 34, 30, 0.1);
+            --shadow-lg: 0 16px 32px rgba(44, 34, 30, 0.14);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Mode Palette */
+            --bg-primary: #181412;
+            --bg-secondary: #221c19;
+            --bg-card: #28211d;
+            --text-main: #f3ede7;
+            --text-muted: #b3a49b;
+            --primary: #d96b43;
+            --primary-hover: #ef7d54;
+            --accent: #e5c158;
+            --accent-light: #332a18;
+            --border-color: #3d322c;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Reset & Global Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, .brand-title {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Container Limit */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION BAR
+           ========================================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] header {
+            background-color: rgba(24, 20, 18, 0.85);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-main);
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--primary);
+            background-color: var(--accent-light);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           3. MAIN CONTENT & SECTIONS (SPA Navigation)
+           ========================================================================== */
+        main {
+            flex: 1;
+        }
+
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            padding: 40px 0;
+        }
+
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SECTION: BERANDA */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(140, 58, 39, 0.92), rgba(60, 24, 15, 0.95)), url('https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
+        }
+
+        .hero-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .hero-banner p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #2c221e;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            background: #e6be44;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 30px 25px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        /* SECTION: MATERI */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .class-filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .materi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .materi-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .materi-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .materi-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .badge-kelas {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(140, 58, 39, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            backdrop-filter: blur(4px);
+        }
+
+        .materi-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .materi-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .materi-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* SECTION: KUIS INTERAKTIF */
+        .quiz-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quiz-progress {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option-btn {
+            background: var(--bg-primary);
+            border: 1.5px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            color: var(--text-main);
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover:not([disabled]) {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .option-btn.correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724 !important;
+            font-weight: 600;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24 !important;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .score-box i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        /* SECTION: GLOSARIUM */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .glosarium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .glosarium-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .glosarium-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .glosarium-term {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .glosarium-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* SECTION: TENTANG */
+        .about-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .about-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+        }
+
+        /* ==========================================================================
+           4. MODAL DIALOG (UNTOK BACA MATERI LENGKAP)
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 750px;
+            max-height: 85vh;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: var(--transition);
+            padding: 35px;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .modal-body p {
+            margin-bottom: 15px;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        .modal-body h4 {
+            color: var(--primary);
+            margin: 20px 0 10px;
+        }
+
+        /* ==========================================================================
+           5. FOOTER & RESPONSIVE DESIGN
+           ========================================================================== */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            margin-top: auto;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                background: var(--bg-card);
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+                box-shadow: var(--shadow-md);
+                display: none;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 12px 20px;
+            }
+
+            .hero-banner {
+                padding: 40px 20px;
+            }
+
+            .hero-banner h2 {
+                font-size: 1.8rem;
+            }
+
+            .quiz-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR & HEADER -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo" onclick="switchSection('beranda')">
+                <i class="fa-solid fa-landmark-dome"></i>
+                <div class="logo-text">
+                    <h1>HISTORIA PINTAR</h1>
+                    <span>SEJARAH SMP</span>
+                </div>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><button class="nav-btn active" onclick="switchSection('beranda')"><i class="fa-solid fa-house"></i> Beranda</button></li>
+                <li><button class="nav-btn" onclick="switchSection('materi')"><i class="fa-solid fa-book-open"></i> Materi</button></li>
+                <li><button class="nav-btn" onclick="switchSection('kuis')"><i class="fa-solid fa-graduation-cap"></i> Kuis</button></li>
+                <li><button class="nav-btn" onclick="switchSection('glosarium')"><i class="fa-solid fa-spell-check"></i> Glosarium</button></li>
+                <li><button class="nav-btn" onclick="switchSection('tentang')"><i class="fa-solid fa-circle-info"></i> Tentang</button></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" title="Ubah Mode Gelap/Terang">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="container">
+
+        <!-- 1. SECTION BERANDA -->
+        <section id="beranda" class="page-section active">
+            <div class="hero-banner">
+                <h2>Jelajahi Waktu & Sejarah Nusantara</h2>
+                <p>Media pembelajaran interaktif sejarah untuk siswa SMP Kelas 7, 8, dan 9. Mari belajar perjalanan masa lalu Indonesia dengan cara yang seru, mudah, dan menyenangkan!</p>
+                <button class="btn-primary" onclick="switchSection('materi')">
+                    <i class="fa-solid fa-compass"></i> Mulai Belajar Sekarang
+                </button>
+            </div>
+
+            <div class="section-header">
+                <h2>Fitur Pembelajaran</h2>
+                <p>Nikmati berbagai fitur yang dirancang khusus untuk membantu belajar sejarah.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" onclick="switchSection('materi')" style="cursor: pointer;">
+                    <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>Materi Terstruktur</h3>
+                    <p>Materi lengkap disesuaikan kurikulum SMP dari Kelas 7 hingga Kelas 9.</p>
+                </div>
+                <div class="feature-card" onclick="switchSection('kuis')" style="cursor: pointer;">
+                    <div class="feature-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3>Kuis Interaktif</h3>
+                    <p>Uji pemahamanmu secara langsung dengan umpan balik skor otomatis.</p>
+                </div>
+                <div class="feature-card" onclick="switchSection('glosarium')" style="cursor: pointer;">
+                    <div class="feature-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h3>Glosarium Sejarah</h3>
+                    <p>Cari & temukan arti istilah-istilah sejarah penting dengan cepat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SECTION MATERI -->
+        <section id="materi" class="page-section">
+            <div class="section-header">
+                <h2>Materi Sejarah SMP</h2>
+                <p>Pilih jenjang kelas untuk mulai mempelajari topik-topik sejarah menarik.</p>
+            </div>
+
+            <div class="class-filter">
+                <button class="filter-btn active" onclick="filterMateri('all')">Semua Kelas</button>
+                <button class="filter-btn" onclick="filterMateri('7')">Kelas 7</button>
+                <button class="filter-btn" onclick="filterMateri('8')">Kelas 8</button>
+                <button class="filter-btn" onclick="filterMateri('9')">Kelas 9</button>
+            </div>
+
+            <div class="materi-grid" id="materiGrid">
+                <!-- Konten Materi dimasukkan secara dinamis melalui JavaScript -->
+            </div>
+        </section>
+
+        <!-- 3. SECTION KUIS -->
+        <section id="kuis" class="page-section">
+            <div class="section-header">
+                <h2>Kuis Sejarah Interaktif</h2>
+                <p>Jawab pertanyaan berikut untuk menguji seberapa jauh pengetahuan sejarahmu!</p>
+            </div>
+
+            <div class="quiz-container" id="quizContainer">
+                <!-- Konten Kuis dimasukkan via JavaScript -->
+            </div>
+        </section>
+
+        <!-- 4. SECTION GLOSARIUM -->
+        <section id="glosarium" class="page-section">
+            <div class="section-header">
+                <h2>Glosarium Istilah Sejarah</h2>
+                <p>Temukan pengertian dari berbagai terminologi sejarah penting.</p>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="glosariumSearch" placeholder="Cari istilah sejarah (misal: Praaksara, Proklamasi)..." oninput="searchGlosarium()">
+            </div>
+
+            <div class="glosarium-grid" id="glosariumGrid">
+                <!-- Konten Glosarium dimasukkan via JavaScript -->
+            </div>
+        </section>
+
+        <!-- 5. SECTION TENTANG -->
+        <section id="tentang" class="page-section">
+            <div class="about-card">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=300&q=80" alt="About">
+                <h2>Media Pembelajaran Sejarah SMP</h2>
+                <p style="margin-top: 15px; color: var(--text-muted);">
+                    Website media pembelajaran ini dirancang khusus untuk membantu para siswa SMP dalam memahami materi pelajaran Sejarah secara visual, interaktif, dan mudah diakses di mana saja.
+                </p>
+                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: center; gap: 20px;">
+                    <div><i class="fa-solid fa-check-circle" style="color: var(--accent);"></i> Kurikulum SMP</div>
+                    <div><i class="fa-solid fa-check-circle" style="color: var(--accent);"></i> Akses Gratis</div>
+                    <div><i class="fa-solid fa-check-circle" style="color: var(--accent);"></i> Kuis Interaktif</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL POPUP BACA MATERI -->
+    <div class="modal-overlay" id="materiModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h3 id="modalTitle">Judul Materi</h3>
+                <span id="modalBadge" class="badge-kelas">Kelas 7</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Detail materi diisi JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Historia Pintar - Media Pembelajaran Sejarah SMP. Dibuat untuk Pendidikan Indonesia.</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       6. JAVASCRIPT LOGIC (Bisa dipisah ke script.js)
+       ========================================================================== -->
+    <script>
+        /* --- Data Materi Sejarah --- */
+        const dataMateri = [
+            {
+                id: 1,
+                kelas: '7',
+                judul: 'Manusia & Zaman Praaksara di Indonesia',
+                ringkasan: 'Mengenal periodisasi masa praaksara berdasarkan arkeologi dan hasil kebudayaan manusia purba.',
+                gambar: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
+                detail: `
+                    <h4>Pengertian Masa Praaksara</h4>
+                    <p>Masa Praaksara atau nirlekha adalah masa kehidupan manusia sebelum mengenal tulisan. Masa ini dimulai sejak manusia ada hingga ditemukannya peninggalan tertulis.</p>
+                    
+                    <h4>Periodisasi Berdasarkan Arkeologi</h4>
+                    <p>1. <b>Zaman Paleolitikum (Batu Tua):</b> Alat-alat batu masih kasar (kapak perimbas).</p>
+                    <p>2. <b>Zaman Mesolitikum (Batu Tengah):</b> Kebudayaan Kyokkenmoddinger (sampah dapur dari kerang) dan Abris Sous Roche (gua tempat tinggal).</p>
+                    <p>3. <b>Zaman Neolitikum (Batu Muda):</b> Manusia mulai bercocok tanam dan memiliki tradisi menetap (kapak persegi & lonjong).</p>
+                    <p>4. <b>Zaman Megalitikum (Batu Besar):</b> Munculnya bangunan batu besar seperti Menhir, Punden Berundak, dan Sarkofagus.</p>
+                `
+            },
+            {
+                id: 2,
+                kelas: '8',
+                judul: 'Kerajaan Hindu-Buddha & Islam di Nusantara',
+                ringkasan: 'Sejarah kejayaan kerajaan Nusantara seperti Kutai, Majapahit, Mataram hingga Kesultanan Demak & Aceh.',
+                gambar: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=600&q=80',
+                detail: `
+                    <h4>Masa Kerajaan Hindu-Buddha</h4>
+                    <p>Masuknya ajaran Hindu-Buddha membawa perubahan besar dari sistem kesukuan menjadi kerajaan bercorak keagamaan. Contoh kerajaan penting meliputi Kutai (kerajaan tertua), Sriwijaya (kerajaan maritim Buddha), dan Majapahit yang berhasil menyatukan Nusantara di bawah Sumpah Palapa Gajah Mada.</p>
+
+                    <h4>Masuk dan Perkembangannya Kerajaan Islam</h4>
+                    <p>Islam masuk ke Nusantara melalui jalur perdagangan, perkawinan, dan dakwah oleh para Wali Songo. Kerajaan Samudera Pasai menjadi kerajaan Islam pertama, disusul oleh Kesultanan Demak di Jawa, serta Kesultanan Gowa-Tallo dan Ternate-Tidore di Indonesia timur.</p>
+                `
+            },
+            {
+                id: 3,
+                kelas: '8',
+                judul: 'Era Kolonialisme & Perlawanan Bangsa',
+                ringkasan: 'Kedatangan bangsa Eropa (Masa VOC & Hindia Belanda) serta perjuangan pahlawan daerah.',
+                gambar: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80',
+                detail: `
+                    <h4>Kedatangan Bangsa Eropa</h4>
+                    <p>Didorong oleh motivasi 3G (Gold, Glory, Gospel), bangsa Portugis, Spanyol, Inggris, dan Belanda datang ke Nusantara untuk menguasai perdagangan rempah-rempah.</p>
+
+                    <h4>Monopoli VOC & Tanam Paksa</h4>
+                    <p>Belanda mendirikan kongsi dagang VOC pada tahun 1602. Setelah VOC bangkrut, pemerintah Hindia Belanda menerapkan kebijakan sistem Tanam Paksa (Cultuurstelsel) yang sangat menyengsarakan rakyat Indonesia.</p>
+
+                    <h4>Perlawanan Kedaerahan</h4>
+                    <p>Rakyat Indonesia melakukan perlawanan sengit di berbagai wilayah, seperti Perang Diponegoro (Jawa), Perang Paderi (Sumatera Barat), dan Perang Banjar.</p>
+                `
+            },
+            {
+                id: 4,
+                kelas: '9',
+                judul: 'Masa Pendudukan Jepang di Indonesia',
+                ringkasan: 'Awal pendudukan Jepang (1942-1945), propaganda, hingga dampak sosial dan politik bagi bangsa.',
+                gambar: 'https://images.unsplash.com/photo-1528164344705-47542687990d?auto=format&fit=crop&w=600&q=80',
+                detail: `
+                    <h4>Kedatangan Jepang (1942)</h4>
+                    <p>Jepang menguasai Indonesia setelah mengalahkan Belanda. Jepang menggunakan propaganda "Saudara Tua" dan slogan 3A (Jepang Pelindung Asia, Jepang Pemimpin Asia, Jepang Cahaya Asia) untuk menarik simpati rakyat.</p>
+
+                    <h4>Sistem Kerja Paksa (Romusha) & Pembentukan Organisasi</h4>
+                    <p>Kehidupan rakyat menjadi sangat menderita akibat sistem kerja paksa Romusha. Namun, Jepang juga membentuk organisasi militer seperti PETA (Pembela Tanah Air) dan Heiho yang nantinya menjadi cikal bakal TNI.</p>
+                `
+            },
+            {
+                id: 5,
+                kelas: '9',
+                judul: 'Perjuangan Mempertahankan Kemerdekaan',
+                ringkasan: 'Peristiwa Rengasdengklok, Proklamasi 17 Agustus 1945, serta perjuangan fisik dan diplomasi.',
+                gambar: 'https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=600&q=80',
+                detail: `
+                    <h4>Proklamasi Kemerdekaan</h4>
+                    <p>Setelah peristiwa Rengasdengklok, pada tanggal 17 Agustus 1945 Ir. Soekarno didampingi Drs. Mohammad Hatta membacakan teks Proklamasi Kemerdekaan di Jalan Pegangsaan Timur No. 56 Jakarta.</p>
+
+                    <h4>Perjuangan Fisik & Diplomasi</h4>
+                    <p>Untuk mempertahankan kemerdekaan dari ancaman Sekutu & NICA, dilakukan perjuangan fisik (Peristiwa 10 November di Surabaya, Bandung Lautan Api) serta perjuangan diplomasi (Perjanjian Linggarjati, Renville, Roem-Royen, hingga Konferensi Meja Bundar/KMB).</p>
+                `
+            }
+        ];
+
+        /* --- Data Kuis --- */
+        const dataKuis = [
+            {
+                soal: "Zaman di mana manusia purba belum mengenal tulisan disebut juga dengan masa...",
+                pilihan: ["Megalitikum", "Praaksara / Nirlekha", "Sekunder", "Arkaaikum"],
+                jawaban: 1
+            },
+            {
+                soal: "Sumpah Palapa yang terkenal untuk menyatukan Nusantara diucapkan oleh tokoh yaitu...",
+                pilihan: ["Hayam Wuruk", "Raja Mulawarman", "Patih Gajah Mada", "Sultan Agung"],
+                jawaban: 2
+            },
+            {
+                soal: "Motivasi bangsa Eropa menjelajah samudra yang bertujuan mencari kekayaan dinamakan...",
+                pilihan: ["Gold", "Glory", "Gospel", "Goodness"],
+                jawaban: 0
+            },
+            {
+                soal: "Organisasi semi-militer bentukan Jepang yang menjadi cikal bakal tentara Indonesia adalah...",
+                pilihan: ["Romusha", "PETA", "Budi Utomo", "Sarekat Islam"],
+                jawaban: 1
+            },
+            {
+                soal: "Teks Proklamasi Kemerdekaan Indonesia dibacakan pada tanggal...",
+                pilihan: ["1 Juni 1945", "17 Agustus 1945", "28 Oktober 1928", "10 November 1945"],
+                jawaban: 1
+            }
+        ];
+
+        /* --- Data Glosarium --- */
+        const dataGlosarium = [
+            { istilah: "Praaksara", arti: "Masa dalam sejarah kehidupan manusia ketika belum mengenal tulisan." },
+            { istilah: "Artefak", arti: "Benda arkeologi atau peninggalan benda-benda bersejarah buatan manusia." },
+            { istilah: "Prasasti", arti: "Piagam atau dokumen tertulis pada bahan keras seperti batu atau tembaga." },
+            { istilah: "Kolonialisme", arti: "Paham tentang penguasaan oleh suatu negara atas daerah/bangsa lain untuk memperluas wilayah." },
+            { istilah: "Romusha", arti: "Panggilan bagi orang-orang Indonesia yang dipekerjakan secara paksa pada masa pendudukan Jepang." },
+            { istilah: "Proklamasi", arti: "Pemberitahuan resmi kepada seluruh rakyat mengenai kemerdekaan suatu negara." },
+            { istilah: "Nirlekha", arti: "Istilah lain dari praaksara; 'Nir' berarti tidak ada dan 'Lekha' berarti tulisan." },
+            { istilah: "Megalitikum", arti: "Zaman batu besar di mana hasil kebudayaannya terbuat dari batu-batu berukuran besar." }
+        ];
+
+        /* --- SPA NAVIGATION LOGIC --- */
+        function switchSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Update status navbar aktif
+            const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(
+                btn => btn.getAttribute('onclick').includes(sectionId)
+            );
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Close mobile nav jika terbuka
+            document.getElementById('navLinks').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* --- MATERI RENDER & FILTER --- */
+        function renderMateri(filter = 'all') {
+            const grid = document.getElementById('materiGrid');
+            grid.innerHTML = '';
+
+            const filteredData = filter === 'all' 
+                ? dataMateri 
+                : dataMateri.filter(m => m.kelas === filter);
+
+            filteredData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'materi-card';
+                card.innerHTML = `
+                    <div class="materi-img" style="background-image: url('${item.gambar}')">
+                        <span class="badge-kelas">Kelas ${item.kelas}</span>
+                    </div>
+                    <div class="materi-body">
+                        <h3>${item.judul}</h3>
+                        <p>${item.ringkasan}</p>
+                        <button class="btn-outline" onclick="openModal(${item.id})">
+                            Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterMateri(kelas) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderMateri(kelas);
+        }
+
+        /* --- MODAL LOGIC --- */
+        function openModal(id) {
+            const materi = dataMateri.find(m => m.id === id);
+            if (!materi) return;
+
+            document.getElementById('modalTitle').innerText = materi.judul;
+            document.getElementById('modalBadge').innerText = `Kelas ${materi.kelas}`;
+            document.getElementById('modalBody').innerHTML = materi.detail;
+            document.getElementById('materiModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('materiModal').classList.remove('active');
+        }
+
+        /* --- KUIS INTERAKTIF LOGIC --- */
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            
+            if (currentQuestionIndex >= dataKuis.length) {
+                // Tampilan Akhir Kuis (Skor)
+                container.innerHTML = `
+                    <div class="score-box">
+                        <i class="fa-solid fa-trophy"></i>
+                        <h2>Kuis Selesai!</h2>
+                        <p>Skor Akhir Anda:</p>
+                        <div class="score-number">${score * 20} / 100</div>
+                        <p style="color: var(--text-muted); margin-bottom: 25px;">
+                            ${score >= 4 ? 'Luar biasa! Kamu sangat menguasai materi sejarah SMP.' : 'Bagus! Terus tingkatkan lagi belajar sejarahmu.'}
+                        </p>
+                        <button class="btn-primary" onclick="restartQuiz()">
+                            <i class="fa-solid fa-rotate-right"></i> Ulangi Kuis
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = dataKuis[currentQuestionIndex];
+            container.innerHTML = `
+                <div class="quiz-header">
+                    <span class="quiz-progress">Pertanyaan ${currentQuestionIndex + 1} dari ${dataKuis.length}</span>
+                    <span><i class="fa-solid fa-star" style="color: var(--accent);"></i> ${score * 20} Poin</span>
+                </div>
+                <div class="question-text">${q.soal}</div>
+                <div class="options-list">
+                    ${q.pilihan.map((opt, idx) => `
+                        <button class="option-btn" onclick="checkAnswer(${idx})">
+                            <span style="font-weight: bold; width: 20px;">${String.fromCharCode(65 + idx)}.</span>
+                            ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+                <div class="quiz-footer" id="quizFooter"></div>
+            `;
+        }
+
+        function checkAnswer(selectedIndex) {
+            const q = dataKuis[currentQuestionIndex];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.disabled = true); // Nonaktifkan pilihan setelah memilih
+
+            if (selectedIndex === q.jawaban) {
+                buttons[selectedIndex].classList.add('correct');
+                score++;
+            } else {
+                buttons[selectedIndex].classList.add('wrong');
+                buttons[q.jawaban].classList.add('correct');
+            }
+
+            const footer = document.getElementById('quizFooter');
+            footer.innerHTML = `
+                <button class="btn-primary" onclick="nextQuestion()">
+                    Lanjut <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            `;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            renderQuiz();
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            renderQuiz();
+        }
+
+        /* --- GLOSARIUM LOGIC --- */
+        function renderGlosarium(data = dataGlosarium) {
+            const grid = document.getElementById('glosariumGrid');
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Istilah sejarah tidak ditemukan.</p>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glosarium-card';
+                card.innerHTML = `
+                    <div class="glosarium-term">
+                        <i class="fa-solid fa-bookmark" style="font-size: 0.9rem;"></i>
+                        <strong>${item.istilah}</strong>
+                    </div>
+                    <div class="glosarium-desc">${item.arti}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function searchGlosarium() {
+            const query = document.getElementById('glosariumSearch').value.toLowerCase();
+            const filtered = dataGlosarium.filter(g => 
+                g.istilah.toLowerCase().includes(query) || 
+                g.arti.toLowerCase().includes(query)
+            );
+            renderGlosarium(filtered);
+        }
+
+        /* --- DARK MODE TOGGLE --- */
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            // Ubah icon
+            themeToggleBtn.innerHTML = newTheme === 'dark' 
+                ? '<i class="fa-solid fa-sun"></i>' 
+                : '<i class="fa-solid fa-moon"></i>';
+        });
+
+        /* --- MOBILE MENU TOGGLE --- */
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+
+        /* --- INITIALIZATION --- */
+        window.onload = function() {
+            renderMateri();
+            renderQuiz();
+            renderGlosarium();
+        };
+    </script>
+</body>
+</html>
